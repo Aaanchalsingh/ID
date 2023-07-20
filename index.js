@@ -13,7 +13,7 @@ main().catch((err) => console.log(err));
 async function main() {
 
 
-    await mongoose.connect("mongodb://127.0.0.1:27017/id");
+    await mongoose.connect("mongodb://0.0.0.0:27017/id");
 
     const storage = multer.diskStorage({
         destination: function (req, file, cb) {
