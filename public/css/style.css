@@ -1,0 +1,221 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    font-family: cursive;
+}
+
+header {
+    background-color: #4047F0;
+    height: 8vh;
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+    color: white;
+}
+
+.outerbox {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.box1 {
+    width: 50%;
+    height: 100vh;
+    border: 1px solid gray;
+    text-align: center;
+    color: #12169e;
+}
+
+.box2 {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    border: 1px solid gray;
+    text-align: center;
+    visibility: hidden;
+}
+
+.photo img {
+    height: 150px;
+    width: 150px;
+    border-radius: 30%;
+}
+
+form {
+    align-items: flex-start;
+    text-align: left;
+    color: black;
+    margin-left: 30%;
+}
+
+input {
+    margin-bottom: 5%;
+    width: 50%;
+    height: 25px;
+    font-size: 1rem;
+}
+
+input[type=text] {
+    border-radius: 5px;
+    background-color: #9fa1e4;
+    border-color: #9fa1e4;
+    margin-bottom: 5%;
+    width: 50%;
+    height: 25px;
+}
+
+h2 {
+    margin-top: 5%;
+    margin-bottom: 3%;
+    font-size: 2rem;
+}
+
+h3 {
+    margin-bottom: 3%;
+    font-size: 1.5rem;
+}
+
+button {
+    background-color: #1d22a7;
+    border-color: #0910d7;
+    border-radius: 5px;
+    color: white;
+    height: 5vh;
+    width: 25vh;
+    font-size: 1.2rem;
+    margin-bottom: 5%;
+}
+
+.card {
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(1, 1, 1, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 1.19);
+    border-radius: 25px;
+    height: 40vh;
+    width: 70vh;
+    background-color: rgb(203, 241, 241);
+    background-image: linear-gradient(#06215b, #1c66ce);
+}
+
+.photo {
+    background-image: linear-gradient(#4047F0, #8f94fb);
+    width: 40%;
+    height: 100%;
+    border-top-left-radius: 23px;
+    border-bottom-left-radius: 23px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.rest {
+    margin-top: 35px;
+    margin-left: 30px;
+    text-align: left;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.details {
+    margin-top: 10%;
+}
+
+p {
+    margin-bottom: 10%;
+}
+
+.grey-prefix {
+    color: white;
+}
+
+.grey-prefix::before {
+    content: attr(data-prefix);
+    color: grey;
+}
+
+#_name {
+    background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" fill="%231f1f1f"/></svg>');
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+}
+
+#_cname {
+    background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M243.4 2.6l-224 96c-14 6-21.8 21-18.7 35.8S16.8 160 32 160v8c0 13.3 10.7 24 24 24H456c13.3 0 24-10.7 24-24v-8c15.2 0 28.3-10.7 31.3-25.6s-4.8-29.9-18.7-35.8l-224-96c-8-3.4-17.2-3.4-25.2 0zM128 224H64V420.3c-.6 .3-1.2 .7-1.8 1.1l-48 32c-11.7 7.8-17 22.4-12.9 35.9S17.9 512 32 512H480c14.1 0 26.5-9.2 30.6-22.7s-1.1-28.1-12.9-35.9l-48-32c-.6-.4-1.2-.7-1.8-1.1V224H384V416H344V224H280V416H232V224H168V416H128V224zM256 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>');
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+}
+
+#_loc {
+    background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M96 0C60.7 0 32 28.7 32 64V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H96zM208 288h64c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16H144c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM512 80c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V80zM496 192c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm16 144c0-8.8-7.2-16-16-16s-16 7.2-16 16v64c0 8.8 7.2 16 16 16s16-7.2 16-16V336z"/></svg>');
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    padding-left: 40px;
+}
+
+@media (max-width: 900px) {
+    * {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    .box1,
+    .box2 {
+        border-color: white;
+    }
+    .card {
+        width: 95vw;
+        margin-bottom: 20%;
+    }
+    header {
+        padding-top: 5%;
+        font-size: 2rem;
+    }
+    .outerbox {
+        flex-direction: column;
+        height: auto;
+    }
+    .box1,
+    .box2 {
+        width: 100%;
+        height: auto;
+    }
+    form {
+        margin-left: 5%;
+    }
+    #choose {
+        width: 100%;
+    }
+    input[type="text"] {
+        width: 80%;
+    }
+    button {
+        width: 50%;
+    }
+    footer {
+        font-family: cursive;
+        text-align: center;
+    }
+    .rest {
+        margin-top: 20%;
+    }
+}
+
+footer {
+    text-align: center;
+    background-color: black;
+    color: white;
+    margin-top: 0%;
+}
+
+.grey-prefix::before {
+    content: attr(data-prefix);
+    color: grey;
+    width: 170px;
+    /* Adjust the width as needed */
+}

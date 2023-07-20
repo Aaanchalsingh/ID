@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID CARD</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<script>
+    function previewFile() {
+        var preview = document.querySelector('img[height="120"]');
+        var file = document.getElementById('choose').files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function() {
+            preview.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "";
+        }
+    }
+</script>
+
+<body>
+    <header>
+        ID Card Generator
+    </header>
+    <div class="outerbox">
+        <div class="box1">
+            <h2>Enter Student Details</h2>
+            <form action="/" method="POST">
+                <h3>Enter Your Name</h3>
+                <input autocomplete="off" type="text" id="_name" name="name">
+                <h3>Enter Your College Name</h3>
+                <input autocomplete="off" type="text" id="_cname" name="cname">
+                <h3>Enter Your Location</h3>
+                <input autocomplete="off" type="text" id="_loc" name="loc">
+                <h3>Enter Student Picture</h3>
+                <input autocomplete="off" type="file" id="choose" name="pic" onchange="previewFile()"><br>
+                <img src="" height="120">
+                <br>
+                <button type="submit" class="btn">Generate Card</button>
+            </form>
+        </div>
+        <div class="box2">
+            <h2>ID Card</h2>
+            <div class="card">
+                <div class="photo">
+                    <img src="" id="cardid" />
+                </div>
+                <div class="rest">
+                    <div class="details">
+                        <p id="name" data-prefix="Name : ">name</p>
+                        <p id="cname" data-prefix="College Name : ">College Name</p>
+                        <p id="loc" data-prefix="Location : ">Location</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        All right reserved Ⓒ Aanchal Singh
+    </footer>
+
+    <script>
+        document.querySelector(".btn").addEventListener("click", handleclick);
+
+        function handleclick(event) {
+            event.preventDefault();
+            var cardpreview = document.getElementById('cardid');
+            var reader = new FileReader();
+            var file = document.getElementById('choose').files[0];
+
+            reader.onloadend = function() {
+                cardpreview.src = reader.result;
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                cardpreview.src = "";
+            }
+
+            // Display form data
+            document.querySelector(".box2").style.visibility = "visible";
+            document.getElementById("name").innerHTML =
+                document.getElementById("_name").value;
+            document.getElementById("cname").innerHTML =
+                document.getElementById("_cname").value;
+            document.getElementById("loc").innerHTML =
+                document.getElementById("_loc").value;
+        }
+    </script>
+    <script src="../app.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+index.js
+
+
+function previewFile() {
+    var preview = document.querySelector('img[height="120"]');
+    var file = document.getElementById('choose').files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function() {
+        preview.src = reader.result;
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = "";
+    }
+}
+
+document.querySelector(".btn").addEventListener("click", handleclick);
+
+function handleclick(event) {
+    event.preventDefault();
+    var cardpreview = document.getElementById('cardid');
+    var reader = new FileReader();
+    var file = document.getElementById('choose').files[0];
+
+    reader.onloadend = function() {
+        cardpreview.src = reader.result;
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        cardpreview.src = "";
+    }
+
+    // Display form data
+    document.querySelector(".box2").style.visibility = "visible";
+    document.getElementById("name").innerHTML =
+        document.getElementById("_name").value;
+    document.getElementById("cname").innerHTML =
+        document.getElementById("_cname").value;
+    document.getElementById("loc").innerHTML =
+        document.getElementById("_loc").value;
+}
