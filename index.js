@@ -3,15 +3,15 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const multer = require("multer");
 
-
+const app = express();
+app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 main().catch((err) => console.log(err));
 
 async function main() {
-    const app = express();
-    app.set("view engine", "ejs");
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(express.static("public"));
+
 
     await mongoose.connect("mongodb://127.0.0.1:27017/id");
 
