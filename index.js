@@ -1,47 +1,52 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const multer = require("multer");
+const express=require("express");
+const bodyParser=require("body-parser");
+const mongoose=require("mongoose");
+const multer=require("multer");
+const dotenv=require("dotenv");
+const path = require("path");
 
-const app = express();
+const app=express();
 app.set("view engine", "ejs");
+
+const staticPath = path.join(__dirname, "public");
+app.use(express.static(staticPath));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+dotenv.config();
 
 main().catch((err) => console.log(err));
 
 async function main() {
 
 
-    await mongoose.connect("mongodb+srv://Aanchall:Aanchal123@cluster0.zqpnceb.mongodb.net/id");
+    await mongoose.connect(process.env.MONGO_URI);
 
-    const storage = multer.diskStorage({
+    const storage=multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, "public/uploads"); // Directory where uploaded files will be stored
+            cb(null, "public/uploads");
         },
         filename: function (req, file, cb) {
-            cb(null, Date.now() + "-" + file.originalname); // Generate a unique filename for the uploaded file
+            cb(null, Date.now()+"-"+file.originalname); // Generate a unique filename for the uploaded file
         },
     });
-    const upload = multer({ storage: storage });
+    const upload=multer({ storage: storage });
 
-    const itemSchema = new mongoose.Schema({
+    const itemSchema=new mongoose.Schema({
         name: String,
         cname: String,
         loc: String,
         pic: String
     });
-    const Item = mongoose.model("Item", itemSchema);
+    const Item=mongoose.model("Item", itemSchema);
 
-    const itemsCount = await Item.countDocuments();
-    if (itemsCount === 0) {
-        const item1 = new Item({ name: "Aanchal", cname: "LPU", loc: "Punjab", pic: "" });
+    const itemsCount=await Item.countDocuments();
+    if (itemsCount===0) {
+        const item1=new Item({ name: "Aanchal", cname: "LPU", loc: "Punjab", pic: "" });
         await item1.save();
     }
 
-    app.get("/", function(req, res) {
+    app.get("/", function (req, res) {
         Item.find().then((data) => {
-            const items = data.map(item => ({
+            const items=data.map(item => ({
                 name: item.name,
                 cname: item.cname,
                 loc: item.loc,
@@ -51,19 +56,20 @@ async function main() {
         });
     });
 
-    app.post("/", upload.single("pic"), function(req, res) {
+    app.post("/", upload.single("pic"), function (req, res) {
 
-        const itemname = req.body.name;
-        const itemcname = req.body.cname;
-        const itemloc = req.body.loc;
-        const itempic = req.file ? req.file.filename : ""; // Get the filename of the uploaded image
+        const itemname=req.body.name;
+        const itemcname=req.body.cname;
+        const itemloc=req.body.loc;
+        const itempic=req.file? req.file.filename:""; // Get the filename of the uploaded image
 
-        const item4 = new Item({ name: itemname, cname: itemcname, loc: itemloc, pic: itempic });
+        const item4=new Item({ name: itemname, cname: itemcname, loc: itemloc, pic: itempic });
         item4.save();
         res.redirect("/");
     });
 
-    app.listen(3000, function() {
+    const port=process.env.PORT||3000;
+    app.listen(port, function () {
         console.log("success");
     });
 }
