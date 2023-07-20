@@ -14,5 +14,11 @@
     ],
     "env": {
       "MONGO_URI": "mongodb+srv://Aanchall:Aanchal123@cluster0.zqpnceb.mongodb.net/id"
-    }
+    },
+    "functions": {
+        "api/**/*.js": {
+          "memory": 512,
+          "maxDuration": 20
+        }
+      }
   }
