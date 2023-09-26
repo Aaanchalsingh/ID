@@ -1,81 +1,71 @@
-// index.js
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+import {
+    getDatabase,
+    ref,
+    push,
+    onValue,
+} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
 
-const express=require("express");
-const bodyParser=require("body-parser");
-const mongoose=require("mongoose");
-const multer=require("multer");
-const dotenv=require("dotenv");
-const path=require("path");
+const appsetting={
+    databaseURL:
+        "https://idcard-65ede-default-rtdb.asia-southeast1.firebasedatabase.app/",
+};
 
-const app=express();
-app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true }));
-const staticPath=path.join(__dirname, "public");
-app.use(express.static(staticPath));
-dotenv.config();
+const app=initializeApp(appsetting);
+const database=getDatabase(app);
+const data=ref(database, "Card");
 
-const itemSchema=new mongoose.Schema({
-    name: String,
-    cname: String,
-    loc: String,
-    pic: String,
-});
-const Item=mongoose.model("Item", itemSchema);
+document.getElementById("add-button").addEventListener("click", handle);
 
-main().catch((err) => console.log(err));
+function handle(event) {
+    event.preventDefault();
+    var name=document.getElementById("_name").value;
+    var cname=document.getElementById("_cname").value;
+    var loc=document.getElementById("_loc").value;
+    var pic=document.getElementById("choose").files[0];
 
-async function main() {
-    await mongoose.connect(process.env.MONGO_URI);
-
-    const storage=multer.diskStorage({
-        destination: function (req, file, cb) {
-            cb(null, "public/uploads");
-        },
-        filename: function (req, file, cb) {
-            cb(null, Date.now()+"-"+file.originalname);
-        },
-    });
-    const upload=multer({ storage: storage });
-
-
-
-    const itemsCount=await Item.countDocuments();
-    if (itemsCount===0) {
-        const item1=new Item({
-            name: "Aanchal",
-            cname: "LPU",
-            loc: "Punjab",
-            pic: "",
-        });
-        await item1.save();
+    if (!name||!cname||!loc||!pic) {
+        alert("Please fill in all fields and select a picture.");
+        return;
     }
 
-    app.get("/", function (req, res) {
-        Item.find().then((data) => {
-            const items=data.map((item) => ({
-                name: item.name,
-                cname: item.cname,
-                loc: item.loc,
-                pic: item.pic,
-            }));
-            res.render("index", { items: JSON.stringify(items) });
-        });
-    });
+    // Convert the picture to a data URL
+    var reader=new FileReader();
+    reader.onloadend=function () {
+        var picDataUrl=reader.result;
+        push(data, { name, cname, loc, pic: picDataUrl });
+        document.getElementById("_name").value="";
+        document.getElementById("_cname").value="";
+        document.getElementById("_loc").value="";
+        document.getElementById("choose").value="";
+        document.querySelector('img[height="120"]').src="";
 
-    app.post("/", upload.single("pic"), function (req, res) {
-        const itemname=req.body.name;
-        const itemcname=req.body.cname;
-        const itemloc=req.body.loc;
-        const itempic=req.file? req.file.filename:"";
+        // Set the src attribute of the displayed-image element
+        document.getElementById("cardid").src=picDataUrl;
+    };
 
-        const item4=new Item({ name: itemname, cname: itemcname, loc: itemloc, pic: itempic });
-        item4.save();
-        res.redirect("/");
-    });
-
-    return app;
+    reader.readAsDataURL(pic);
+    document.querySelector(".box2").style.visibility="visible";
+    document.getElementById("name").innerHTML=name;
+    document.getElementById("cname").innerHTML=cname;
+    document.getElementById("loc").innerHTML=loc;
 }
 
-const server=main();
 
-module.exports=server;
+document.getElementById("choose").addEventListener("change", previewFile);
+
+function previewFile() {
+    var preview=document.querySelector('img[height="120"]');
+    var file=document.getElementById("choose").files[0];
+    var reader=new FileReader();
+
+    reader.onloadend=function () {
+        preview.src=reader.result;
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src="";
+    }
+}

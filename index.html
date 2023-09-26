@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ID CARD</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header>ID Card Generator</header>
+    <div class="outerbox">
+      <div class="box1">
+        <h2>Enter Student Details</h2>
+        <form action="/" method="POST" id="cardForm">
+          <h3>Enter Your Name</h3>
+          <input type="text" id="_name" name="name" />
+          <h3>Enter Your College Name</h3>
+          <input type="text" id="_cname" name="cname" />
+          <h3>Enter Your Location</h3>
+          <input type="text" id="_loc" name="loc" />
+          <h3>Enter Student Picture</h3>
+          <input
+            type="file"
+            id="choose"
+            name="pic"
+          /><br />
+          <img src="" height="120" />
+          <br />
+          <button
+            type="submit"
+            class="btn"
+            id="add-button"
+          >
+            Generate Card
+          </button>
+        </form>
+      </div>
+      <div class="box2">
+        <h2>ID Card</h2>
+        <div class="card">
+          <div class="photo">
+            <img src="" id="cardid" />
+          </div>
+          <div class="rest">
+            <div class="details">
+              <p class="grey-prefix" data-prefix="Name : " id="name"></p>
+              <p
+                class="grey-prefix"
+                data-prefix="College Name : "
+                id="cname"
+              ></p>
+              <p class="grey-prefix" data-prefix="Location : " id="loc"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>All right reseved Ⓒ Aanchal Singh</footer>
+    <script type="module" src="index.js"></script>
+  </body>
+</html>
